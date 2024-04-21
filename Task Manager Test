@@ -1,0 +1,38 @@
+import java.util.Date;
+
+public class TaskManagerTest {
+    public static void main(String[] args) {
+        // Create a TaskManager instance
+        TaskManager taskManager = new TaskManager();
+
+        // Create sample tasks
+        Task task1 = new Task("Task 1", "Description of Task 1", new Date(), "Category1", 1, 0, "Notes for Task 1");
+        Task task2 = new Task("Task 2", "Description of Task 2", new Date(), "Category2", 2, 0, "Notes for Task 2");
+        Task task3 = new Task("Task 3", "Description of Task 3", new Date(), "Category3", 3, 0, "Notes for Task 3");
+
+        // Add tasks to TaskManager
+        taskManager.addTask(task1);
+        taskManager.addTask(task2);
+        taskManager.addTask(task3);
+
+        // Test getting all tasks
+        System.out.println("All tasks:");
+        for (Task task : taskManager.getAllTasks()) {
+            System.out.println(task.getTitle());
+        }
+
+        // Test getting tasks due before a specified date
+        Date currentDate = new Date();
+        System.out.println("\nTasks due before " + currentDate + ":");
+        for (Task task : taskManager.getTasksDueBefore(currentDate)) {
+            System.out.println(task.getTitle());
+        }
+
+        // Test removing a task
+        taskManager.removeTask(task2);
+        System.out.println("\nTasks after removing Task 2:");
+        for (Task task : taskManager.getAllTasks()) {
+            System.out.println(task.getTitle());
+        }
+    }
+}
