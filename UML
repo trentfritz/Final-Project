@@ -1,0 +1,57 @@
+**Class Diagram:**
+---------------------------------------------
+| TaskManager |
+---------------------------------------------
+| - taskList: ArrayList<Task> |
+| - calendar: Calendar |
+---------------------------------------------
+| + TaskManager() |
+| + addTask(task: Task): void |
+| + removeTask(task: Task): void |
+| + updateTask(task: Task): void |
+| + setReminder(task: Task, time: Date): void |
+| + removeReminder(task: Task): void |
+---------------------------------------------
+---------------------------------------------
+| Task |
+---------------------------------------------
+| - title: String |
+| - description: String |
+| - dueDate: Date |
+| - category: String |
+| - priority: int |
+| - progress: int |
+| - notes: String |
+---------------------------------------------
+| + Task(title: String, description: String, dueDate: Date, category: String, priority: int,
+progress: int, notes: String) |
+| + getTitle(): String |
+| + setTitle(title: String): void |
+| + getDescription(): String |
+| + setDescription(description: String): void |
+| + getDueDate(): Date |
+| + setDueDate(dueDate: Date): void |
+| + getCategory(): String |
+| + setCategory(category: String): void |
+| + getPriority(): int |
+| + setPriority(priority: int): void |
+| + getProgress(): int |
+| + setProgress(progress: int): void |
+| + getNotes(): String |
+| + setNotes(notes: String): void |
+---------------------------------------------
+---------------------------------------------
+| Reminder |
+---------------------------------------------
+| - task: Task |
+| - reminderTime: Date |
+| - isActive: boolean |
+---------------------------------------------
+| + Reminder(task: Task, reminderTime: Date) |
+| + getTask(): Task |
+| + setTask(task: Task): void |
+| + getReminderTime(): Date |
+| + setReminderTime(reminderTime: Date): void |
+| + isActive(): boolean |
+| + setActive(active: boolean): void |
+---------------------------------------------
