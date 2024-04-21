@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class TaskManager {
+    private List<Task> taskList;
+
+    // Constructor
+    public TaskManager() {
+        taskList = new ArrayList<>();
+    }
+
+    // Method to add a task to the task list
+    public void addTask(Task task) {
+        taskList.add(task);
+    }
+
+    // Method to remove a task from the task list
+    public void removeTask(Task task) {
+        taskList.remove(task);
+    }
+
+    // Method to update a task in the task list
+    public void updateTask(Task task) {
+        // Implement update logic here
+    }
+
+    // Method to get all tasks in the task list
+    public List<Task> getAllTasks() {
+        return taskList;
+    }
+
+    // Method to get tasks with due dates before a specified date
+    public List<Task> getTasksDueBefore(Date date) {
+        List<Task> tasksDueBefore = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getDueDate().before(date)) {
+                tasksDueBefore.add(task);
+            }
+        }
+        return tasksDueBefore;
+    }
+}
