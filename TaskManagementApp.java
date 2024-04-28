@@ -48,9 +48,19 @@ public class TaskManagementApp extends Application {
             }
         });
 
+        // Add/Delete Task Buttons
+        Button addTaskButton = new Button("Add Task");
+        addTaskButton.setOnAction(event -> addTask());
+
+        Button deleteTaskButton = new Button("Delete Task");
+        deleteTaskButton.setOnAction(event -> deleteTask(taskListView.getSelectionModel().getSelectedItem()));
+
+        HBox buttonBox = new HBox(10, addTaskButton, deleteTaskButton);
+        buttonBox.setPadding(new Insets(10));
+
         // Add components to root pane
         root.setLeft(calendarGrid);
-        root.setRight(taskListView);
+        root.setRight(new VBox(10, buttonBox, taskListView));
 
         // Show scene
         Scene scene = new Scene(root, 800, 600);
@@ -59,6 +69,7 @@ public class TaskManagementApp extends Application {
         primaryStage.show();
     }
 
+    // Method to refresh the calendar view with tasks for the selected date
     private void refreshCalendarView(GridPane calendarGrid, LocalDate date) {
         calendarGrid.getChildren().clear();
 
@@ -79,6 +90,31 @@ public class TaskManagementApp extends Application {
         }
     }
 
+    // Method to handle adding a new task
+    private void addTask() {
+        // Implement logic to add a new task, e.g., open a dialog for user input
+        // Once the task is added, refresh the task list and calendar view
+    }
+
+    // Method to handle deleting a task
+    private void deleteTask(Task task) {
+        if (task != null) {
+            // Implement logic to delete the selected task
+            // Once the task is deleted, refresh the task list and calendar view
+        }
+    }
+
+    // Method to show task details in an alert dialog
+    private void showTaskDetails(Task task) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Task Details");
+        alert.setHeaderText(task.getTitle());
+        alert.setContentText("Description: " + task.getDescription() + "\nDue Date: " + task.getDueDate() +
+                "\nPriority: " + task.getPriority() + "\nProgress: " + task.getProgress() + "\nNotes: " + task.getNotes());
+        alert.showAndWait();
+    }
+
+    // Method to get priority color based on task priority
     private String getPriorityColor(Priority priority) {
         switch (priority) {
             case HIGH:
@@ -92,83 +128,10 @@ public class TaskManagementApp extends Application {
         }
     }
 
-    private void showTaskDetails(Task task) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Task Details");
-        alert.setHeaderText(task.getTitle());
-        alert.setContentText("Description: " + task.getDescription() + "\nDue Date: " + task.getDueDate() +
-                "\nPriority: " + task.getPriority() + "\nProgress: " + task.getProgress() + "\nNotes: " + task.getNotes());
-        alert.showAndWait();
-    }
-
     public static void main(String[] args) {
         launch(args);
     }
 }
 
 class TaskManager {
-    private Map<LocalDate, List<Task>> calendar;
-
-    public TaskManager() {
-        calendar = new HashMap<>();
-    }
-
-    public void scheduleTask(LocalDate date, Task task) {
-        if (!calendar.containsKey(date)) {
-            calendar.put(date, new ArrayList<>());
-        }
-        calendar.get(date).add(task);
-    }
-
-    public List<Task> getTasks(LocalDate date) {
-        return calendar.getOrDefault(date, Collections.emptyList());
-    }
-}
-
-enum Priority {
-    HIGH,
-    MEDIUM,
-    LOW
-}
-
-class Task {
-    private String title;
-    private String description;
-    private LocalDate dueDate;
-    private Priority priority;
-    private int progress;
-    private String notes;
-
-    public Task(String title, String description, LocalDate dueDate, Priority priority, int progress, String notes) {
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.priority = priority;
-        this.progress = progress;
-        this.notes = notes;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
-    public Priority getPriority() {
-        return priority;
-    }
-
-    public int getProgress() {
-        return progress;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-}
+    private Map
