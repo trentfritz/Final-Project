@@ -1,16 +1,18 @@
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
 
 public class TaskManagementApp extends Application {
     private TaskManager taskManager;
@@ -134,4 +136,65 @@ public class TaskManagementApp extends Application {
 }
 
 class TaskManager {
-    private Map
+    private Map<LocalDate, List<Task>> tasksMap;
+
+    public TaskManager() {
+        tasksMap = new HashMap<>();
+    }
+
+    public void scheduleTask(LocalDate date, Task task) {
+        tasksMap.computeIfAbsent(date, k -> new ArrayList<>()).add(task);
+    }
+
+    public List<Task> getTasks(LocalDate date) {
+        return tasksMap.getOrDefault(date, Collections.emptyList());
+    }
+}
+
+class Task {
+    private String title;
+    private String description;
+    private LocalDate dueDate;
+    private Priority priority;
+    private int progress;
+    private String notes;
+
+    public Task(String title, String description, LocalDate dueDate, Priority priority, int progress, String notes) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.progress = progress;
+        this.notes = notes;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+}
+
+enum Priority {
+    HIGH,
+    MEDIUM,
+    LOW
+}
